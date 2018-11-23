@@ -68,13 +68,13 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $request): JsonResponse
+    public function logout(Request $request): Response
     {
         /** @var Token $token */
         $token = $request->user()->token();
         $token->revoke();
 
         $response = 'You have succesfully logout';
-        return response($response, JsonResponse::HTTP_OK);
+        return response($response, Response::HTTP_OK);
     }
 }
