@@ -21,5 +21,5 @@ class Product extends Model
     protected $casts = [
         'title' => 'string',
         'price' => 'float',
-    ]
+    ];
 }

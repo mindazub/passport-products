@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -20,7 +21,8 @@ class ProductController extends Controller
      */
     public function index(): View
     {
-        return view('products.index');
+        $products = Product::paginate(5);
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -41,6 +43,12 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request): RedirectResponse
     {
+
+        Product::create([
+            'title'=> $request->getTitle(),
+            'price'=> $request->getPrice(),
+        ]);
+
         return redirect()->route('product.index')->with('status', 'Product created');
     }
 

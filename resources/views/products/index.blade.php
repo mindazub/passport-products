@@ -18,13 +18,37 @@
                         @endif
 
                     <table class="table">
+                        <thead>
                         <tr>
                             <th>ID</th>
                             <th>Title</th>
                             <th>Price</th>
                             <th>Actions</th>
                         </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($products as $product)
+                            <tr>
+                                <td>{{ $product->id }}</td>
+                                <td>{{ $product->title }}</td>
+                                <td>{{ $product->price }}</td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">
+                                    {{ $products->links() }}
+                                </td>
+
+                            </tr>
+                        </tfoot>
                     </table>
+
+
                     </div>
                 </div>
             </div>
