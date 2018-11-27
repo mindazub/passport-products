@@ -53,7 +53,7 @@ class RoleController extends Controller
      * @param  \App\Role $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(Role $role): View
     {
         $role = Role::query()->findOrFail($role->id);
 
@@ -69,7 +69,9 @@ class RoleController extends Controller
      */
     public function update(RoleRequest $request, Role $role): RedirectResponse
     {
-        Role::query()->find($role->id)->update($request->toArray());
+//        Role::query()->find($role->id)->update($request->toArray());
+
+        $role->update($request->toArray());
 
         return redirect()->route('role.index')
             ->with('status', 'Role updated successfully!');

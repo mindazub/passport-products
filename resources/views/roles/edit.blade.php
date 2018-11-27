@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('role.update', $role->id) }}" method="post">
+                        <form action="{{ route('role.update', [ 'role' => $role->id ]) }}" method="post">
                             @csrf
                             @method('put')
                             <div class="form-group">
@@ -22,6 +22,16 @@
                                 <input type="text" name="title" id="title" value="{{ old('title', $role->title) }}" class="form-control">
                                 @if($errors->has('title'))
                                     <div class="alert alert-danger">{{ $errors->first('title') }}</div>
+                                @endif
+                            </div>
+
+                            <div class="form-group">
+                                <label for="discount">
+                                    {{ __('Dicount') }}
+                                </label>
+                                <input type="number" class="form-control" step="1" value="{{ old('discount', $role->discount) }}" name="discount" id="discount">
+                                @if($errors->has('discount'))
+                                    <div class="alert alert-danger">{{ $errors->first('discount') }}</div>
                                 @endif
                             </div>
 

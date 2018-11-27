@@ -15,13 +15,15 @@ class Role extends Model
      * @var array
      */
     protected $fillable = [
-        'title'
+        'title',
+        'discount'
     ];
 
     /**
      * @var array
      */
     protected $casts = [
-        'title' => 'string'
+        'title' => 'string',
+        'discount' => 'float',
     ];
 }

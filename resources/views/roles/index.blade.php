@@ -22,6 +22,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Title</th>
+                                <th>Discount</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -30,6 +31,7 @@
                                 <tr>
                                     <td>{{ $role->id }}</td>
                                     <td>{{ $role->title }}</td>
+                                    <td>{{ $role->discount }}</td>
                                     <td>
                                         <a class="btn btn-sm btn-primary" href="{{ route('role.edit', $role->id) }}">Update</a>
                                         <form action="{{ route('role.destroy', $role->id) }}" method="post">

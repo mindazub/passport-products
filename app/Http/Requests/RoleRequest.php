@@ -32,17 +32,23 @@ class RoleRequest extends FormRequest
                 'required',
                 'string',
                 'min:6',
+                'unique:roles'
+            ],
+            'discount' => [
+                'required',
+                'min:0',
+                'max:50',
+                'numeric'
             ]
         ];
 
-        if ($this->isMethod('POST')) {
-            $rules['title'][] = 'unique:roles';
+        if ($this->isMethod('PUT')) {
+            $rules['title'] = 'required|min:2';
         }
 
-        if ($this->isMethod('PUT')) {
-            $rules['title'][] = Rule::unique('roles')->ignore($this->route()->parameter('role')->id);
-        }
 
         return $rules;
     }
+
+
 }
