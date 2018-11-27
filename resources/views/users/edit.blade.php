@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ __('New product') }}</div>
+                    <div class="card-header">{{ __('Update user') }}</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -14,20 +14,22 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('product.store') }}" method="post">
+                        <form action="{{ route('user.update', $user->id) }}" method="post">
                             @csrf
+                            @method('put')
                             <div class="form-group">
-                                <label for="title">{{ __('Title') }}</label>
-                                <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
-                                @if($errors->has('title'))
-                                    <div class="alert alert-danger">{{ $errors->first('title') }}</div>
+                                <label for="name">{{ __('Name') }}</label>
+                                <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" class="form-control">
+                                @if($errors->has('name'))
+                                    <div class="alert alert-danger">{{ $errors->first('name') }}</div>
                                 @endif
                             </div>
+
                             <div class="form-group">
-                                <label for="price">{{ __('Price') }}</label>
-                                <input type="number" name="price" id="price" value="{{ old('price', '0.00') }}" class="form-control" step="0.01">
-                                @if($errors->has('price'))
-                                    <div class="alert alert-danger">{{ $errors->first('price') }}</div>
+                                <label for="email">{{ __('Email') }}</label>
+                                <input type="text" name="email" id="email" value="{{ old('email', $user->email) }}" class="form-control">
+                                @if($errors->has('email'))
+                                    <div class="alert alert-danger">{{ $errors->first('email') }}</div>
                                 @endif
                             </div>
 

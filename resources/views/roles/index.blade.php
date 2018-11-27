@@ -6,8 +6,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        {{ __('Products') }}
-                        <a href="{{ route('product.create') }}" class="btn btn-primary btn-sm">New</a>
+                        {{ __('Roles') }}
+                        <a href="{{ route('role.create') }}" class="btn btn-primary btn-sm">New</a>
                     </div>
 
                     <div class="card-body">
@@ -22,19 +22,17 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Title</th>
-                                <th>Price</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($products as $product)
+                            @foreach($roles as $role)
                                 <tr>
-                                    <td>{{ $product->id }}</td>
-                                    <td>{{ $product->title }}</td>
-                                    <td>{{ $product->price }}</td>
+                                    <td>{{ $role->id }}</td>
+                                    <td>{{ $role->title }}</td>
                                     <td>
-                                        <a class="btn btn-sm btn-primary" href="{{ route('product.edit', $product->id) }}">Update</a>
-                                        <form action="{{ route('product.destroy', $product->id) }}" method="post">
+                                        <a class="btn btn-sm btn-primary" href="{{ route('role.edit', $role->id) }}">Update</a>
+                                        <form action="{{ route('role.destroy', $role->id) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <input type="submit" value="Delete" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
@@ -46,7 +44,7 @@
                             <tfoot>
                             <tr>
                                 <td colspan="4">
-                                    {{ $products->links() }}
+                                    {{ $roles->links() }}
                                 </td>
                             </tr>
                             </tfoot>
