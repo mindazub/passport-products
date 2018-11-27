@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Passport\Token;
@@ -20,11 +21,14 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
+
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:191',
             'email' => 'required|email|string|max:191|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
+
 
         if($validator->fails())
         {
@@ -59,7 +63,7 @@ class AuthController extends Controller
 
                 return response($response, JsonResponse::HTTP_OK);
             } else {
-                $response = 'Incorerect password';
+                $response = 'Incorrect password';
                 return response($response, JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
             }
         } else {
