@@ -56,7 +56,10 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">
-                                        {{ __('List') }}
+                                        {{ __('Users') }}
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        {{ __('Roles') }}
                                     </a>
                                 </div>
                             </li>

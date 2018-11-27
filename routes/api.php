@@ -22,6 +22,8 @@ Route::group(['middleware' => ['json.response']], function (){
 
 
     Route::post('/register', 'API\AuthController@register')->name('register.api');
+    Route::post('/login', 'API\AuthController@login')->name('login.api');
+    Route::get('/logout', 'API\AuthController@logout')->name('logout.api');
 
 });
 
