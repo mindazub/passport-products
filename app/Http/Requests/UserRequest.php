@@ -33,11 +33,22 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
+            'role_id' => 'nullable|array',
             'email' => [
                 'required',
                 'email',
                 Rule::unique('users')->ignore($this->route()->parameter('user')),
+
             ],
         ];
+    }
+
+    /**
+     * @return array|null
+     */
+
+    public function getRoleIds(): ?array
+    {
+        return $this->input('role_id');
     }
 }

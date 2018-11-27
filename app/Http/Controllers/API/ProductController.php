@@ -64,15 +64,22 @@ class ProductController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update(Request $request, int $id): Response
+    public function update(ProductRequest $request, int $id): Response
     {
-        /*
-        $product = Product::query()->find($id);
+        try{
+            $product = Product::query()->find($id)
+                ->update([
+                    'title' => $request->title,
+                    'price' => $request->price,
+                ], ['id' => $id]));
 
-        return response((string)$product->update([
-            'title' => $request->title,
-            'price' => $request->price,
-        ], ['id' => $id]));*/
+        } catch(\Throwable $exception) {
+            return response(['message' => "Product not with ID: $id updated"], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+
+
+        return response($product);
     }
 
     /**
