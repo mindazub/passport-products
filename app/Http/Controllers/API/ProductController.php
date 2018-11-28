@@ -6,10 +6,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\ProductRequest;
 use App\Product;
+use App\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class ProductController
@@ -24,7 +27,19 @@ class ProductController extends Controller
      */
     public function index(): Response
     {
+        /** @var User $user */
+        $user = Auth::user();
+
+        $discount = $user->roles()->max('discount');
+
+        /**  @var LengthAwarePaginator $products*/
         $products = Product::query()->paginate();
+        /** @var Product $product */
+        foreach ($products->items() as &$product)
+        {
+//            dump($product->price);
+            $product->price = number_format((($product->price * (100 - $discount))/100), 2);
+        }
 
         return response($products);
     }
@@ -71,7 +86,7 @@ class ProductController extends Controller
                 ->update([
                     'title' => $request->title,
                     'price' => $request->price,
-                ], ['id' => $id]));
+                ], ['id' => $id]);
 
         } catch(\Throwable $exception) {
             return response(['message' => "Product not with ID: $id updated"], Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -79,7 +94,7 @@ class ProductController extends Controller
 
 
 
-        return response($product);
+        return response((string)$product);
     }
 
     /**
