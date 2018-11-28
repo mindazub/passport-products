@@ -222,6 +222,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        // cia galima globaliai uzbindinti facade
+
     ],
 
 ];

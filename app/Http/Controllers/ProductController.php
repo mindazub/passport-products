@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
+use App\Facades\PriceConvert;
 use App\Http\Requests\ProductRequest;
 use App\Product;
 use Illuminate\Http\RedirectResponse;

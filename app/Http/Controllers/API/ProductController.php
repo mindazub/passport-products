@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers\API;
 
+use App\Facades\PriceConvert;
 use App\Http\Requests\ProductRequest;
 use App\Product;
 use App\User;
@@ -27,18 +28,20 @@ class ProductController extends Controller
      */
     public function index(): Response
     {
+
+
+
         /** @var User $user */
         $user = Auth::user();
 
-        $discount = $user->roles()->max('discount');
+        $discount = (float)$user->roles()->max('discount');
 
         /**  @var LengthAwarePaginator $products*/
         $products = Product::query()->paginate();
         /** @var Product $product */
         foreach ($products->items() as &$product)
         {
-//            dump($product->price);
-            $product->price = number_format((($product->price * (100 - $discount))/100), 2);
+            $product->price = PriceConvert::discountedPrice($product->price, $discount);
         }
 
         return response($products);
