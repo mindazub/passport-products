@@ -73,6 +73,9 @@
                                     <a class="dropdown-item" href="{{ route('product.index') }}">
                                         {{ __('Products') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('product.generate_data') }}">
+                                        {{ __('Generate Products') }}
+                                    </a>
                                 </div>
                             </li>
 

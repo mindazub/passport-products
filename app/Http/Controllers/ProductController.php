@@ -5,7 +5,9 @@ declare(strict_types = 1);
 namespace App\Http\Controllers;
 
 use App\Facades\PriceConvert;
+use App\Http\Requests\ProductGenerateRequest;
 use App\Http\Requests\ProductRequest;
+use App\Jobs\GenerateRandomProductsJob;
 use App\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -91,5 +93,24 @@ class ProductController extends Controller
 
         return redirect()->route('product.index')
             ->with('status', 'Product successfully deleted!');
+    }
+
+    public function generateDataForm(): View
+    {
+        return view('products.generate_form');
+    }
+
+    /**
+     * @param ProductGenerateRequest $request
+     * @return RedirectResponse
+     */
+    public function generateData(ProductGenerateRequest $request): RedirectResponse
+    {
+        GenerateRandomProductsJob::dispatch($request->getCount())->onQueue('create-products');
+
+
+        return redirect()->route('product.index')
+            ->with('status', 'Generate products data in few seconds');
+        
     }
 }
